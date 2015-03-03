@@ -9,8 +9,8 @@
 <div ng-app="flip" ng-controller="flipCtrl">
     <div class="flip"> 
         <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front" ng-controller="getPermitsToday">PERMITS<br>
-                {{permitCount.COUNT}}<br>
+            <div class="face front">PERMITS<br>
+                {{permitCount}}<br>
                 Issued Today
             </div> 
             <div class="face back"> 

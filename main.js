@@ -1,12 +1,15 @@
 var module = angular.module('flip', []);
-module.controller('flipCtrl', function($scope) {});
- 
-function getPermitsToday($scope, $http) {
+module.controller('flipCtrl', function($scope, $http) {
+    $scope.permitCount = 0;
+    getPermitsToday();
+    getLastFive();
+    function getPermitsToday() {
     //$http.get('http://rest-service.guides.spring.io/greeting').
-    var myURL = 'http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20trunc(sysdate)&fields=count(*)%20as%20count';    success(function(data) {
-        	//angular.forEach(data, function (id, i) {
-          	//$scope.activeids.push(id.Count);
-			$scope.permitCount = data[0];
+        $http.jsonp('http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20trunc(sysdate)&fields=count(*)%20as%20count&callback=JSON_CALLBACK')    
+        .success(function(data) {
+            //angular.forEach(data, function (id, i) {
+            //$scope.activeids.push(id.Count);
+            $scope.permitCount = data[0].COUNT;
             var currentTime = new Date();
             var hours = currentTime.getHours();
             var minutes = currentTime.getMinutes();
@@ -25,16 +28,20 @@ function getPermitsToday($scope, $http) {
             //var current_time = hours + ":" + minutes + " " + suffix;
             $scope.currentTime = hours + ":" + minutes + " " + suffix;
 
-        	});
-		}
-function getLastFive($scope, $http) {
-    //$http.get('http://rest-service.guides.spring.io/greeting').
-    $http.get('http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20sysdate').
-        success(function(data) {
-        	//angular.forEach(data, function (id, i) {
-          	//$scope.activeids.push(id.Count);
-			$scope.greeting = data[0];
-        	});
+            });
+        }
+        function getLastFive() {
+            //$http.get('http://rest-service.guides.spring.io/greeting').
+            $http.jsonp('http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20sysdate')
+                .success(function(data) {
+                    //angular.forEach(data, function (id, i) {
+                    //$scope.activeids.push(id.Count);
+                    $scope.greeting = data[0];
+                }
+            );
 
-		}
+        }
+});
+
+
 	
