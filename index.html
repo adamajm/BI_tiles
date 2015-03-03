@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Prototype</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+      <title>Today at the City of Raleigh</title>
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <script src="js/angular.min.js"></script>
+      <script src="main.js"></script>
     </head>
-<div ng-app="flip" ng-controller="flipCtrl">
-    <div class="flip"> 
-        <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front">PERMITS<br>
-                {{permitCount}}<br>
-                Issued Today
+    <body>
+      <h1>Today at the City of Raleigh</h1>
+      <div ng-app="flip" ng-controller="flipCtrl">
+        <div class="flip"> 
+          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
+            <div class="face front">
+              <h1>{{permitCount}}</h1>
+              Permits Issued
             </div> 
             <div class="face back"> 
-                Last Five Permits
+              Last Five Permits
             </div> 
+          </div> 
+          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
+            <div class="face front">
+              <h1>{{permitCount}}</h1>
+              Permits Issued
+            </div> 
+            <div class="face back"> 
+              Last Five Permits
+            </div> 
+          </div> 
+          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
+            <div class="face front">
+              <h1>{{permitCount}}</h1>
+              Permits Issued
+            </div> 
+            <div class="face back"> 
+              Last Five Permits
+            </div> 
+          </div> 
+          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
+            <div class="face front">
+              <h1>{{permitCount}}</h1>
+              Permits Issued
+            </div> 
+            <div class="face back"> 
+              Last Five Permits
+            </div> 
+          </div> 
         </div> 
-    </div> 
-</div>
+      </div>
+    </body>
+</html>
