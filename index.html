@@ -1,53 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Today at the City of Raleigh</title>
-      <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" type="text/css" href="css/main.css">
-      <script src="js/angular.min.js"></script>
-      <script src="main.js"></script>
+    <title>Prototype</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     </head>
-    <body>
-      <h1>Today at the City of Raleigh</h1>
-      <div ng-app="flip" ng-controller="flipCtrl">
-        <div class="flip"> 
-          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front">
-              <h1>{{permitCount}}</h1>
-              Permits Issued
-            </div> 
-            <div class="face back"> 
-              Last Five Permits
-            </div> 
-          </div> 
-          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front">
-              <h1>{{permitCount}}</h1>
-              Permits Issued
-            </div> 
-            <div class="face back"> 
-              Last Five Permits
-            </div> 
-          </div> 
-          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front">
-              <h1>{{permitCount}}</h1>
-              Permits Issued
-            </div> 
-            <div class="face back"> 
-              Last Five Permits
-            </div> 
-          </div> 
-          <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-            <div class="face front">
-              <h1>{{permitCount}}</h1>
-              Permits Issued
-            </div> 
-            <div class="face back"> 
-              Last Five Permits
-            </div> 
-          </div> 
-        </div> 
-      </div>
-    </body>
-</html>
+<div ng-app="businessTiles">
+    <flip-tile factory="iris" title="PERMITS" subtitle="issued today" value-field="COUNT" method="getIrisCount" table="iris.permits_all_view" fields="count(*) as count" parameters="grp_issue_date>= trunc(sysdate)">
+    </flip-tile>
+    <flip-tile factory="transloc" title="BUSES" subtitle="in service" value-field="count" method="getVehicleCount">
+    </flip-tile>
+    <flip-tile factory="transloc" title="BUSES" subtitle="average speed" value-field="speed" method="getVehicleCount">
+    </flip-tile>
+</div>

@@ -1,47 +1,65 @@
-var module = angular.module('flip', []);
-module.controller('flipCtrl', function($scope, $http) {
-    $scope.permitCount = 0;
-    getPermitsToday();
-    getLastFive();
-    function getPermitsToday() {
-    //$http.get('http://rest-service.guides.spring.io/greeting').
-        $http.jsonp('http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20trunc(sysdate)&fields=count(*)%20as%20count&callback=JSON_CALLBACK')    
-        .success(function(data) {
-            //angular.forEach(data, function (id, i) {
-            //$scope.activeids.push(id.Count);
-            $scope.permitCount = data[0].COUNT;
-            var currentTime = new Date();
-            var hours = currentTime.getHours();
-            var minutes = currentTime.getMinutes();
-            if (minutes < 10){
-                minutes = "0" + minutes;
+angular.module('businessTiles', [])
+.directive('flipTile', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'flipTile.html',
+        scope: {
+            factory: '@',
+            title: '@',
+            subtitle: '@',
+            valueField: '@',
+            method: '@',
+            table: '@',
+            fields: '@',
+            parameters: '@'
+        },
+        controller: function ($scope, $injector) {
+           $injector.get($scope.factory)[$scope.method]($scope.table, $scope.fields, $scope.parameters).then(function (count) {
+                $scope.value = count[$scope.valueField];
+                $scope.updated = moment().format('MMMM Do YYYY, h:mm:ss a');
+            }); ;
+        }
+    }
+})
+.factory('iris', ['$http', '$q', function($http, $q){
+    var irisUrl = 'http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php';
+    var service = {};
+    service.getIrisCount = function (table, fields, params) {
+        var d = $q.defer();
+        $http.jsonp(irisUrl, {
+            params: {
+                table: table,
+                fields: fields,
+                parameters: params,
+                callback: 'JSON_CALLBACK'
             }
-            var suffix = "AM";
-
-            if (hours >= 12) {
-                suffix = "PM";
-                hours = hours - 12;
-            }
-            if (hours == 0) {
-                hours = 12;
-            }
-            //var current_time = hours + ":" + minutes + " " + suffix;
-            $scope.currentTime = hours + ":" + minutes + " " + suffix;
-
+        }).success(function (data) {
+            d.resolve(data[0]);
+        });
+        return d.promise;
+    }
+    return service;
+}])
+.factory('transloc', ['$http', '$q', function($http, $q){
+    var baseUrl = 'https://transloc-api-1-2.p.mashape.com/';
+    var headers = {'X-Mashape-Key': 'QcvihLtHdgmshtY0Yjsg7nytW4Iqp1MEy05jsnSqvl1Lqjt9eW'};
+    var service = {};
+    service.getVehicleCount = function () {
+        var d = $q.defer();
+        $http({
+            url: baseUrl + '/vehicles.json',
+            params: {
+                agencies: '20', 
+            },
+            headers: headers
+        }).success(function (data) {
+            var speed = 0;
+            angular.forEach(data.data[20], function (v) {
+                speed += v.speed;
             });
-        }
-        function getLastFive() {
-            //$http.get('http://rest-service.guides.spring.io/greeting').
-            $http.jsonp('http://gisdevarc1/dirt-simple-iris/v1/ws_geo_attributequery.php?table=iris.permits_all_view&parameters=grp_issue_date%3E%3D%20sysdate')
-                .success(function(data) {
-                    //angular.forEach(data, function (id, i) {
-                    //$scope.activeids.push(id.Count);
-                    $scope.greeting = data[0];
-                }
-            );
-
-        }
-});
-
-
-	
+            d.resolve({count: data.data[20].length, speed: Math.round(speed/data.data[20].length)+'mph'});
+        });
+        return d.promise;
+    }
+    return service;
+}]);
