@@ -28,10 +28,10 @@ angular.module('businessTiles', [])
 })
 .controller('businessCtrl', ['$scope', function($scope){
     $scope.tiles = [
-    {factory:"iris", cardTitle:"PERMITS", subtitle:"issued today", valueField:"COUNT", method:"getIrisCount", table:"iris.permits_all_view", fields:"count(*) as count", parameters:"grp_issue_date>= trunc(sysdate)", frequency:"10000"},
-    {factory:"transloc", cardTitle:"BUSES", subtitle:"in service", valueField:"count", method:"getVehicleCount", frequency:"5000"},
-    {factory:"transloc", cardTitle:"BUSES", subtitle:"average speed", valueField:"speed", method:"getVehicleCount", frequency:"5000"},
-    {factory:"cityworks", cardTitle:"SERVICE REQUESTS", subtitle:"Open in See Click Fix", valueField:"COUNT", method:"getCount", table:"azteca.request", fields:"count(*) as count", parameters:"initiatedby = 'FIX, SEE CLICK' and not (status in ('CANCEL','CANCEL NOT FOUND', 'CANCEL OTHER', 'CLOSED'))", frequency:"10000"}     
+    {factory:"iris", cardTitle:"Permits Issued Today", subtitle:"Permits Issued Today", valueField:"COUNT", method:"getIrisCount", table:"iris.permits_all_view", fields:"count(*) as count", parameters:"grp_issue_date>= trunc(sysdate)", frequency:"10000"},
+    {factory:"transloc", cardTitle:"Buses In Service", subtitle:"in service", valueField:"count", method:"getVehicleCount", frequency:"5000"},
+    {factory:"transloc", cardTitle:"Average Bus Speed (mph)", subtitle:"average speed", valueField:"speed", method:"getVehicleCount", frequency:"5000"},
+    {factory:"cityworks", cardTitle:"See Click Fix Open Requests", subtitle:"Open in See Click Fix", valueField:"COUNT", method:"getCount", table:"azteca.request", fields:"count(*) as count", parameters:"initiatedby = 'FIX, SEE CLICK' and not (status in ('CANCEL','CANCEL NOT FOUND', 'CANCEL OTHER', 'CLOSED'))", frequency:"10000"}     
     ];
 }])
 .factory('iris', ['$http', '$q', function($http, $q){
@@ -89,7 +89,7 @@ angular.module('businessTiles', [])
             angular.forEach(data.data[20], function (v) {
                 speed += v.speed;
             });
-            d.resolve({count: data.data[20].length, speed: Math.round(speed/data.data[20].length)+'mph'});
+            d.resolve({count: data.data[20].length, speed: Math.round(speed/data.data[20].length)});
         });
         return d.promise;
     }

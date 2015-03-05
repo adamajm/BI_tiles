@@ -2,12 +2,16 @@
 <html>
     <head>
     <title>Prototype</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/angular.js"></script>
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
     </head>
-<div ng-app="businessTiles" ng-controller="businessCtrl">
-    <flip-tile ng-repeat="tile in tiles" ng-model="tile" card-title="tile.cardTitle" subtitle="tile.subtitle" value-field="tile.valueField" factory="tile.factory" method="tile.method" table="tile.table" fields="tile.fields" parameters="tile.parameters" frequency="tile.frequency"></flip-tile>
+<body>  
+<h1>Today at the City of Raleigh</h1>  
+<div ng-app="businessTiles" ng-controller="businessCtrl" class="flip" >
+    <flip-tile class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"ng-repeat="tile in tiles" ng-model="tile" card-title="tile.cardTitle" subtitle="tile.subtitle" value-field="tile.valueField" factory="tile.factory" method="tile.method" table="tile.table" fields="tile.fields" parameters="tile.parameters" frequency="tile.frequency"></flip-tile>
 </div>
+</body>
+</html>

@@ -1,13 +1,9 @@
-<div class="flip"> 
-    <div class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped"> 
-        <div class="face front">{{cardTitle}}<br>
-            <strong>{{value}}</strong><br>
-            {{subtitle}}
+        <div class="face front">
+            <h1>{{value}}</h1><br>
+            {{cardTitle}}
             <br>
             <p class="update-time">{{updated}}</p>
         </div> 
         <div class="face back"> 
             Last Five Permits
         </div> 
-    </div> 
-</div> 
