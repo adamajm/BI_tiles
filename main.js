@@ -11,13 +11,18 @@ angular.module('businessTiles', [])
             method: '@',
             table: '@',
             fields: '@',
-            parameters: '@'
+            parameters: '@',
+            frequency: '@'
         },
-        controller: function ($scope, $injector) {
-           $injector.get($scope.factory)[$scope.method]($scope.table, $scope.fields, $scope.parameters).then(function (count) {
-                $scope.value = count[$scope.valueField];
-                $scope.updated = moment().format('MMMM Do YYYY, h:mm:ss a');
-            }); ;
+        controller: function ($scope, $injector, $interval) {
+            getCounts();
+            $interval(getCounts, $scope.frequency);
+           function getCounts () {
+                $injector.get($scope.factory)[$scope.method]($scope.table, $scope.fields, $scope.parameters).then(function (count) {
+                    $scope.value = count[$scope.valueField];
+                    $scope.updated = moment().format('MMMM Do YYYY, h:mm:ss a');
+                });      
+           }
         }
     }
 })
