@@ -5,7 +5,7 @@ angular.module('businessTiles', [])
         templateUrl: 'flipTile.html',
         scope: {
             factory: '@',
-            title: '@',
+            cardTitle: '@',
             subtitle: '@',
             valueField: '@',
             method: '@',

@@ -9,10 +9,10 @@
     <script type="text/javascript" src="main.js"></script>
     </head>
 <div ng-app="businessTiles">
-    <flip-tile factory="iris" title="PERMITS" subtitle="issued today" value-field="COUNT" method="getIrisCount" table="iris.permits_all_view" fields="count(*) as count" parameters="grp_issue_date>= trunc(sysdate)" frequency="10000">
+    <flip-tile factory="iris" card-title="PERMITS" subtitle="issued today" value-field="COUNT" method="getIrisCount" table="iris.permits_all_view" fields="count(*) as count" parameters="grp_issue_date>= trunc(sysdate)" frequency="10000">
     </flip-tile>
-    <flip-tile factory="transloc" title="BUSES" subtitle="in service" value-field="count" method="getVehicleCount" frequency="5000">
+    <flip-tile factory="transloc" card-title="BUSES" subtitle="in service" value-field="count" method="getVehicleCount" frequency="5000">
     </flip-tile>
-    <flip-tile factory="transloc" title="BUSES" subtitle="average speed" value-field="speed" method="getVehicleCount" frequency="5000">
+    <flip-tile factory="transloc" card-title="BUSES" subtitle="average speed" value-field="speed" method="getVehicleCount" frequency="5000">
     </flip-tile>
 </div>
