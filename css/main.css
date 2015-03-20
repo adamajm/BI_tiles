@@ -36,6 +36,11 @@ html:before{
     transform: scale(1.1);
 }
 
+.map {
+  height: 250px;
+  width: 400px;
+}
+
 .update-time {
   font-size: 35%;
 }
@@ -48,6 +53,7 @@ body {
 .flip {
   -webkit-perspective: 800;
   display:flex;
+  -webkit-display:flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
