@@ -65,6 +65,8 @@ angular.module('businessTiles', [])
     {factory:"transloc", cardTitle:"Average Bus Speed (mph)", subtitle:"average speed", valueField:"speed", method:"getVehicleCount", frequency:"5000", labelField: "speed"},
     {factory:"cityworks", cardTitle:"Open See Click Fixes", subtitle:"Open in See Click Fix", valueField:"COUNT", method:"getCount", table:"azteca.request", fields:"SRX, SRY, DESCRIPTION", parameters:"initiatedby = 'FIX, SEE CLICK' and not (status in ('CANCEL','CANCEL NOT FOUND', 'CANCEL OTHER', 'CLOSED'))", frequency:"10000", labelField: "DESCRIPTION"},    
     {factory:"iris", cardTitle:"Permits Issued Today", subtitle:"Permits Issued Today", valueField:"COUNT", method:"getIrisCount", table:"iris.permits_all_view", fields:"NCPIN,GRP_PROPOSED_WORK", parameters:"grp_issue_date>= trunc(sysdate)", frequency:"10000", labelField: "GRP_PROPOSED_WORK"},    
+    {factory:"parking_meters", cardTitle:"Occupied street meters", subtitle:"open meters", valueField:"COUNT", method:"getCount", frequency:"60000"},    
+    
     ];
 }])
 .factory('iris', ['$http', '$q', function($http, $q){
@@ -162,4 +164,26 @@ angular.module('businessTiles', [])
         return d.promise;
     }
     return service;
-}]);
+}])
+
+.factory('parking_meters', ['$http', '$q', '$filter', function($http, $q, $filter){
+    var Url = 'http://rhsoatstapp1:9292/area/1/216?callback=JSON_CALLBACK';
+    var service = {};
+    service.getCount = function () {
+        var d = $q.defer();
+        $http.jsonp(Url).success(function (data) {
+            var t = $filter('filter')(data, function(a){
+                return a.properties.STATUS == 'paid';
+            })
+            //STATUS: "paid", "expired"
+            d.resolve({COUNT: t.length + " of " + data.length});
+        });
+        return d.promise;
+    }
+    return service;
+}])
+
+
+
+;
+
