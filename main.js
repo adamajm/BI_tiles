@@ -88,8 +88,10 @@ angular.module('businessTiles', [])
               ]
             };            
             angular.forEach(data, function (d) {
+                if (d.NCPIN){
                 var ll = getLatLngFromPIN(d.NCPIN);
                 gj.features.push({type: 'Feature', geometry: {type: 'Point', coordinates:ll}, properties: d});
+                }
             });
             d.resolve({COUNT: data.length, geojson: gj});
         });
