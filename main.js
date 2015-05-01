@@ -65,18 +65,7 @@ angular.module('businessTiles', [])
     {factory:"transloc", cardTitle:"Average Bus Speed (mph)", subtitle:"average speed", valueField:"speed", method:"getVehicleCount", frequency:"5000", labelField: "speed"},
     {factory:"cityworks", cardTitle:"Open See Click Fixes", subtitle:"Open in See Click Fix", valueField:"COUNT", method:"getCount", table:"azteca.request", fields:"SRX, SRY, DESCRIPTION", parameters:"initiatedby = 'FIX, SEE CLICK' and not (status in ('CANCEL','CANCEL NOT FOUND', 'CANCEL OTHER', 'CLOSED'))", frequency:"10000", labelField: "DESCRIPTION"},    
     {factory:"iris", cardTitle:"Permits Issued Today", subtitle:"Permits Issued Today", valueField:"COUNT", method:"getIrisCount", table:"iris.permits_all_view", fields:"NCPIN,GRP_PROPOSED_WORK", parameters:"grp_issue_date>= trunc(sysdate)", frequency:"10000", labelField: "GRP_PROPOSED_WORK"},    
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
     {factory:"parking_meters", cardTitle:"Occupied metered street spaces", subtitle:"open meters", valueField:"COUNT", method:"getCount", frequency:"60000"},
-
-
-    
->>>>>>> Stashed changes
-=======
-    {factory:"parking_meters", cardTitle:"Occupied street meters", subtitle:"open meters", valueField:"COUNT", method:"getCount", frequency:"60000"},    
-    
->>>>>>> master
     ];
 }])
 .factory('iris', ['$http', '$q', function($http, $q){
