@@ -16,8 +16,16 @@
     </head>
 <body>  
 <h1>Today at the City of Raleigh</h1>  
+<div class="col-md-4"><iframe width="760px" title="New See Click Fix Tickets by Month" height="646px" src="https://data.raleighnc.gov/w/w2kx-u8pn/2fxh-wcp7?cur=jJRI9Z_BQcI&from=root" frameborder="0"scrolling="no"><a href="https://data.raleighnc.gov/Infrastructure/New-See-Click-Fix-Tickets-by-Month/w2kx-u8pn" title="New See Click Fix Tickets by Month" target="_blank">New See Click Fix Tickets by Month</a></iframe><p><a href="http://www.socrata.com/" target="_blank">Powered by Socrata</a></p></div>
+</div>
+<div class="col-md-4"><iframe width="760px" title="Closed See Click Fix Tickets by Month" height="646px" src="https://data.raleighnc.gov/w/e6bs-hmjq/2fxh-wcp7?cur=hv7YRqrWy8E&from=root" frameborder="0"scrolling="no"><a href="https://data.raleighnc.gov/Infrastructure/Closed-See-Click-Fix-Tickets-by-Month/e6bs-hmjq" title="Closed See Click Fix Tickets by Month" target="_blank">Closed See Click Fix Tickets by Month</a></iframe><p><a href="http://www.socrata.com/" target="_blank">Powered by Socrata</a></p></div>
+
 <div ng-app="businessTiles" ng-controller="businessCtrl" class="flip" >
     <flip-tile class="card" ng-class="{'flipped':isFlipped}" ng-click="isFlipped=!isFlipped" ng-repeat="tile in tiles" ng-model="tile" card-title="tile.cardTitle" subtitle="tile.subtitle" value-field="tile.valueField" factory="tile.factory" method="tile.method" table="tile.table" fields="tile.fields" parameters="tile.parameters" frequency="tile.frequency" label-field="tile.labelField"></flip-tile>
+</div>
+
+<div class="col-md-4">
+
 </div>
 </body>
 </html>
